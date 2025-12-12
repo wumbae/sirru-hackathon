@@ -24,7 +24,7 @@ export default function HomeScreen() {
         style={{ paddingTop: insets.top + 8 }}
       >
         <View className="flex-row items-center justify-between">
-          {/* Logo */}
+          {/* Left: Logo */}
           <Text 
             className="text-xl font-black tracking-wider"
             style={{ 
@@ -39,13 +39,21 @@ export default function HomeScreen() {
           
           {/* Right side: Insights + Atoll */}
           <View className="flex-row items-center gap-2">
+            {/* Insights button - more visible */}
             <Pressable 
               onPress={() => setShowInsights(true)}
-              className="w-8 h-8 rounded-full items-center justify-center"
-              style={{ backgroundColor: COLORS.surface + 'DD' }}
+              className="flex-row items-center px-3 py-1.5 rounded-full"
+              style={{ 
+                backgroundColor: COLORS.primary + '20',
+                borderWidth: 1,
+                borderColor: COLORS.primary + '40',
+              }}
             >
-              <Text style={{ fontSize: 14 }}>📊</Text>
+              <Text style={{ fontSize: 12, marginRight: 4 }}>📊</Text>
+              <Text style={{ color: COLORS.primary, fontSize: 12, fontWeight: '600' }}>Insights</Text>
             </Pressable>
+            
+            {/* Atoll badge */}
             <View 
               className="flex-row items-center px-2.5 py-1.5 rounded-full"
               style={{ backgroundColor: COLORS.surface + 'DD' }}
@@ -59,36 +67,55 @@ export default function HomeScreen() {
           </View>
         </View>
         
-        {/* Stats pill - integrated under header */}
-        <Pressable 
-          onPress={() => setShowInsights(true)}
-          className="mt-3 py-2 px-4 rounded-full self-center"
-          style={{ backgroundColor: COLORS.surface + 'CC' }}
-        >
-          <View className="flex-row items-center">
-            <Text className="text-text font-semibold">{DEMO_STATS.total}</Text>
-            <Text className="text-textMuted text-sm ml-1">tonight</Text>
-            <View className="w-1 h-1 rounded-full bg-textMuted mx-2" />
-            <View className="flex-row items-center">
-              <View 
-                className="w-2 h-2 rounded-full mr-1"
-                style={{ backgroundColor: COLORS.sunny }}
-              />
-              <Text style={{ color: COLORS.sunny, fontWeight: '500', fontSize: 13 }}>{DEMO_STATS.sunny}</Text>
-            </View>
-            <View className="flex-row items-center ml-2">
-              <View 
-                className="w-2 h-2 rounded-full mr-1"
-                style={{ backgroundColor: COLORS.stormy }}
-              />
-              <Text style={{ color: COLORS.stormy, fontWeight: '500', fontSize: 13 }}>{DEMO_STATS.stormy}</Text>
-            </View>
-          </View>
-        </Pressable>
       </View>
 
       {/* ===== MAP - Full screen background ===== */}
       <MaldivesMap checkins={DEMO_CHECKINS} userAtoll={USER_ATOLL} />
+
+      {/* ===== STATS PILL - Right bottom corner ===== */}
+      <Pressable 
+        onPress={() => setShowInsights(true)}
+        style={{ 
+          position: 'absolute',
+          right: 12,
+          bottom: 100,
+          backgroundColor: COLORS.surface + 'DD',
+          borderRadius: 16,
+          paddingVertical: 8,
+          paddingHorizontal: 12,
+        }}
+      >
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Text style={{ color: COLORS.text, fontWeight: '600', fontSize: 13 }}>{DEMO_STATS.total}</Text>
+          <Text style={{ color: COLORS.textMuted, fontSize: 11, marginLeft: 4 }}>tonight</Text>
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 4, gap: 8 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View 
+              style={{ 
+                width: 6,
+                height: 6,
+                borderRadius: 3,
+                backgroundColor: COLORS.sunny,
+                marginRight: 4,
+              }}
+            />
+            <Text style={{ color: COLORS.sunny, fontWeight: '500', fontSize: 11 }}>{DEMO_STATS.sunny}</Text>
+          </View>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View 
+              style={{ 
+                width: 6,
+                height: 6,
+                borderRadius: 3,
+                backgroundColor: COLORS.stormy,
+                marginRight: 4,
+              }}
+            />
+            <Text style={{ color: COLORS.stormy, fontWeight: '500', fontSize: 11 }}>{DEMO_STATS.stormy}</Text>
+          </View>
+        </View>
+      </Pressable>
 
       {/* ===== LEGEND - Left side vertical ===== */}
       <View 
