@@ -2,8 +2,10 @@ import { useState, useRef, useEffect } from 'react';
 import { View, Text, ScrollView, TextInput, Pressable, KeyboardAvoidingView, Platform } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { COLORS, CRISIS_LINES } from '../constants';
 import { getKoamasResponse } from '../data/demoData';
+import { MainStackParamList } from '../navigation/types';
 
 type Message = {
   id: string;
@@ -20,7 +22,7 @@ const QUICK_PROMPTS = [
 
 export default function KoamasScreen() {
   const insets = useSafeAreaInsets();
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<MainStackParamList>>();
   const scrollViewRef = useRef<ScrollView>(null);
   
   const [messages, setMessages] = useState<Message[]>([

@@ -5,15 +5,17 @@ import { View, Text } from 'react-native';
 import { useMemo, useState } from 'react';
 import Svg, { Path, Circle } from 'react-native-svg';
 import { COLORS } from '../constants';
-import { MainTabParamList, OnboardingStackParamList } from './types';
+import { MainTabParamList, OnboardingStackParamList, MainStackParamList } from './types';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import NicknameScreen from '../screens/NicknameScreen';
 import AtollScreen from '../screens/AtollScreen';
 import HomeScreen from '../screens/HomeScreen';
 import BreathingScreen from '../screens/BreathingScreen';
 import ChatScreen from '../screens/ChatScreen';
+import KoamasScreen from '../screens/KoamasScreen';
 
 const OnboardingStack = createNativeStackNavigator<OnboardingStackParamList>();
+const MainStack = createNativeStackNavigator<MainStackParamList>();
 const MainTabs = createBottomTabNavigator<MainTabParamList>();
 
 // Custom SVG Icons
@@ -171,6 +173,22 @@ function MainTabNavigator() {
   );
 }
 
+function MainNavigator() {
+  return (
+    <MainStack.Navigator screenOptions={{ headerShown: false }}>
+      <MainStack.Screen name="MainTabs" component={MainTabNavigator} />
+      <MainStack.Screen 
+        name="Koamas" 
+        component={KoamasScreen}
+        options={{
+          presentation: 'modal',
+          animation: 'slide_from_bottom',
+        }}
+      />
+    </MainStack.Navigator>
+  );
+}
+
 const navigationTheme = {
   ...DarkTheme,
   colors: {
@@ -190,7 +208,7 @@ export default function AppNavigator() {
 
   return (
     <NavigationContainer theme={theme}>
-      {hasOnboarded ? <MainTabNavigator /> : <OnboardingNavigator onComplete={() => setHasOnboarded(true)} />}
+      {hasOnboarded ? <MainNavigator /> : <OnboardingNavigator onComplete={() => setHasOnboarded(true)} />}
     </NavigationContainer>
   );
 }

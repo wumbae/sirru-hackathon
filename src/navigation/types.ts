@@ -10,3 +10,8 @@ export type MainTabParamList = {
   Chat: undefined;
 };
 
+export type MainStackParamList = {
+  MainTabs: undefined;
+  Koamas: undefined;
+};
+

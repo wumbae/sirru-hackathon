@@ -40,8 +40,7 @@ export default function CheckinModal({ visible, onClose }: Props) {
     
     // Navigate based on selection
     if (option === 'koamas') {
-      // Navigate to Koamas screen (will be added to navigation)
-      navigation.navigate('Chat'); // Temporary - will be KoamasScreen
+      navigation.navigate('Koamas');
     } else if (option === 'faru') {
       navigation.navigate('Chat');
     } else if (option === 'breathing') {
