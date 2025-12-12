@@ -101,15 +101,24 @@ export const FARU_SCRIPT: FaruMessage[] = [
     content: "Hey everyone. Safe space here. How's everyone's storm tonight?",
     delay: 0,
   },
-  { id: '2', creature: 'turtle', content: "can't sleep again", delay: 3000 },
-  { id: '3', creature: 'shark', content: "same here. brain won't shut up", delay: 5000 },
+  { id: '2', creature: 'turtle', content: "can't sleep again 😔", delay: 3000 },
+  { id: '3', creature: 'shark', content: "same here. brain won't shut up", delay: 5500 },
   {
     id: '4',
     creature: 'koamas',
     content: "Those nights are the hardest. You're not alone — clearly others are up too.",
-    delay: 8000,
+    delay: 8500,
   },
-  { id: '5', creature: 'octopus', content: 'it helps knowing others feel it too', delay: 11000 },
+  { id: '5', creature: 'octopus', content: 'it helps knowing others feel it too', delay: 12000 },
+  { id: '6', creature: 'turtle', content: "yeah... thanks for being here everyone 💙", delay: 15000 },
+  { 
+    id: '7', 
+    creature: 'koamas', 
+    content: "That's what the Faru is for. We're all just floating through this together.", 
+    delay: 18500 
+  },
+  { id: '8', creature: 'shark', content: "anyone tried the breathing exercise? actually helped me yesterday", delay: 22000 },
+  { id: '9', creature: 'octopus', content: "the 4-4-4-4 one? gonna try it now", delay: 25000 },
 ];
 
 export const ANCHOR_COUNT = 2847;
