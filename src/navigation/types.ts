@@ -13,5 +13,6 @@ export type MainTabParamList = {
 export type MainStackParamList = {
   MainTabs: undefined;
   Koamas: undefined;
+  BreathingComplete: { cycles: number; duration: number };
 };
 

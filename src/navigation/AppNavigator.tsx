@@ -13,6 +13,7 @@ import HomeScreen from '../screens/HomeScreen';
 import BreathingScreen from '../screens/BreathingScreen';
 import ChatScreen from '../screens/ChatScreen';
 import KoamasScreen from '../screens/KoamasScreen';
+import BreathingCompleteScreen from '../screens/BreathingCompleteScreen';
 
 const OnboardingStack = createNativeStackNavigator<OnboardingStackParamList>();
 const MainStack = createNativeStackNavigator<MainStackParamList>();
@@ -183,6 +184,14 @@ function MainNavigator() {
         options={{
           presentation: 'modal',
           animation: 'slide_from_bottom',
+        }}
+      />
+      <MainStack.Screen 
+        name="BreathingComplete" 
+        component={BreathingCompleteScreen}
+        options={{
+          presentation: 'modal',
+          animation: 'fade',
         }}
       />
     </MainStack.Navigator>

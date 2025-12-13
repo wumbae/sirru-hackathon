@@ -9,7 +9,7 @@
 **Sirru** (Dhivehi: "The Secret") is an anonymous mental wellness app designed for Maldivian youth. The app provides a safe, judgment-free space for emotional check-ins, peer support, and breathing exercises.
 
 **Target Platform:** iOS & Android (React Native + Expo)  
-**Current Status:** Hackathon Prototype (Demo-ready)  
+**Current Status:** ✅ Hackathon Prototype (Demo-ready)  
 **Data:** All hardcoded for demonstration
 
 ---
@@ -125,7 +125,7 @@ The main dashboard showing real-time emotional weather across the Maldives.
 | Element | Position | Description |
 |---------|----------|-------------|
 | Logo | Top-left | "SIRRU" with glow |
-| Insights Button | Top-right | "📊 Insights" - opens modal |
+| Insights Button | Top-right | "📊 Insights" pill button |
 | Atoll Badge | Top-right | Shows user's atoll (e.g., "Kaafu (Malé)") |
 
 #### 3.2 Maldives Map (`MaldivesMap.tsx`)
@@ -143,7 +143,7 @@ The main dashboard showing real-time emotional weather across the Maldives.
 #### 3.3 UI Overlays
 | Element | Position | Description |
 |---------|----------|-------------|
-| Legend | Bottom-left | Sunny/Stormy indicators |
+| Legend | Bottom-left | Sunny/Stormy indicators (vertical) |
 | Stats Pill | Bottom-right | "X tonight • ●Y ●Z" |
 | Check-in Button | Bottom-center | "How's your weather?" |
 
@@ -161,23 +161,21 @@ The main dashboard showing real-time emotional weather across the Maldives.
 6. **If Stormy:** Triggers Support Options Modal
 
 #### 3.5 Support Options Modal (`SupportOptionsModal.tsx`)
-**Status:** ✅ Complete (Navigation partially working)
+**Status:** ✅ Complete & Fully Functional
 
 Shown after a stormy check-in:
 
 | Option | Icon | Description | Action |
 |--------|------|-------------|--------|
-| Talk to Koamas | 💬 | "A friend who listens" | → KoamasScreen* |
-| Join the Faru | 🐢 | "Connect with others" | → ChatScreen |
-| Breathing Exercise | 🌬️ | "1 minute to calm" | → BreathingScreen |
+| Talk to Koamas | 💬 | "A friend who listens" | → KoamasScreen ✅ |
+| Join the Faru | 🐢 | "Connect with others" | → ChatScreen ✅ |
+| Breathing Exercise | 🌬️ | "1 minute to calm" | → BreathingScreen ✅ |
 | Just check in | ✕ | Skip support | Close modal |
-
-*Note: KoamasScreen navigation needs wiring
 
 #### 3.6 Insights Modal
 **Status:** ✅ Complete
 
-Accessed via 📊 button or stats pill:
+Accessed via 📊 Insights button:
 
 | Section | Content |
 |---------|---------|
@@ -188,7 +186,7 @@ Accessed via 📊 button or stats pill:
 ---
 
 ### 4. Breathing Screen (`BreathingScreen.tsx`)
-**Status:** ✅ Complete & Functional
+**Status:** ✅ Complete & Fully Functional
 
 **Box Breathing Exercise (4-4-4-4 Technique)**
 
@@ -219,37 +217,63 @@ Accessed via 📊 button or stats pill:
 - ✅ Cycle counting
 - ✅ Duration tracking
 - ✅ Smooth animations
+- ✅ **Auto-navigates to completion after 3 cycles**
 
 ---
 
-### 5. Chat Screen / Faru (`ChatScreen.tsx`)
-**Status:** ⚠️ Static Demo
+### 5. Breathing Complete Screen (`BreathingCompleteScreen.tsx`)
+**Status:** ✅ Complete & Wired
 
-Anonymous group chat for peer support.
+Post-breathing celebration screen.
+
+| Element | Description |
+|---------|-------------|
+| Icon | 🧘 with cyan glow |
+| Title | "Well done!" |
+| Subtitle | "X cycles completed. Take this calm with you." |
+| Stats | Cycles + Duration (from actual session) |
+| Quote | Random inspirational quote |
+| CTA | "Back to Home" / "Breathe Again" |
+
+---
+
+### 6. Chat Screen / Faru (`ChatScreen.tsx`)
+**Status:** ✅ Complete & Dynamic
+
+Anonymous group chat for peer support with **auto-playing messages**.
 
 #### Header
 | Element | Description |
 |---------|-------------|
-| Icon | 🐚 Faru |
-| Status | "12 in the reef tonight" |
+| Icon | 🐚 The Faru |
+| Status | "X in the reef tonight" (randomized 5-12) |
+| Badge | "Safe Space" pill |
 
-#### Demo Messages (Hardcoded)
-| Creature | Message |
-|----------|---------|
-| 🐙 Koamas | "Hey everyone. Safe space here..." |
-| 🐢 Turtle | "can't sleep again" |
-| 🦈 Shark | "same here. brain won't shut up" |
-| 🐙 Koamas | (typing indicator) |
+#### Auto-Play Script (9 messages)
+| Time | Creature | Message |
+|------|----------|---------|
+| 0s | 🐙 Koamas | "Hey everyone. Safe space here..." |
+| 3s | 🐢 Turtle | "can't sleep again 😔" |
+| 5.5s | 🦈 Shark | "same here. brain won't shut up" |
+| 8.5s | 🐙 Koamas | "Those nights are the hardest..." |
+| 12s | 🐙 Octopus | "it helps knowing others feel it too" |
+| 15s | 🐢 Turtle | "yeah... thanks for being here 💙" |
+| 18.5s | 🐙 Koamas | "That's what the Faru is for..." |
+| 22s | 🦈 Shark | "anyone tried the breathing exercise?" |
+| 25s | 🐙 Octopus | "the 4-4-4-4 one? gonna try it now" |
 
-#### Input Area
-- Text input placeholder: "Share how you're feeling..."
-- Send button
-- Footer: "Messages are anonymous and disappear at sunrise 🌅"
+#### Features
+- ✅ Animated typing indicators (bouncing dots)
+- ✅ Message fade-in animations
+- ✅ Auto-scroll as messages appear
+- ✅ User can type and get a response
+- ✅ Welcome banner
+- ✅ "Messages disappear at sunrise 🌅" footer
 
 ---
 
-### 6. Koamas Screen (`KoamasScreen.tsx`)
-**Status:** ✅ Complete but **not accessible from navigation**
+### 7. Koamas Screen (`KoamasScreen.tsx`)
+**Status:** ✅ Complete & Accessible
 
 1:1 AI chat companion for emotional support.
 
@@ -259,7 +283,7 @@ Anonymous group chat for peer support.
 | Welcome Message | Personalized greeting from Koamas |
 | Quick Prompts | "can't sleep", "feeling alone", "stressed", "anxious" |
 | Keyword Matching | AI responds based on keywords in user message |
-| Typing Indicator | Shows while "thinking" |
+| Typing Indicator | Shows while "thinking" (1.5-2.5s delay) |
 | Crisis Line Notice | Always visible at bottom |
 
 #### Response Keywords
@@ -271,19 +295,9 @@ Anonymous group chat for peer support.
 | "hurt myself" | Crisis resources provided |
 | (default) | "I hear you. Want to tell me more?" |
 
----
-
-### 7. Additional Screens (Created but not wired)
-
-#### FaruScreen (`FaruScreen.tsx`)
-**Status:** ⚠️ Created, not integrated
-
-Alternative implementation of group chat with scripted autoplay.
-
-#### BreathingCompleteScreen (`BreathingCompleteScreen.tsx`)
-**Status:** ⚠️ Created, not integrated
-
-Post-breathing celebration screen with session stats.
+#### Access Points
+- ✅ From Support Options Modal (after stormy check-in)
+- Opens as modal (slide up from bottom)
 
 ---
 
@@ -292,9 +306,9 @@ Post-breathing celebration screen with session stats.
 ### Check-in Stats
 ```typescript
 DEMO_STATS = {
-  total: 10,
-  sunny: 3,
-  stormy: 7,
+  total: 25,
+  sunny: 7,
+  stormy: 18,
 }
 ```
 
@@ -326,23 +340,35 @@ Always accessible in the app:
 
 ---
 
-## ⚠️ Known Gaps / TODO
+## ✅ All Features Complete
 
-### High Priority
-1. [ ] Wire KoamasScreen to navigation (accessible from Support Modal)
-2. [ ] Connect BreathingCompleteScreen after exercise ends
-3. [ ] Make ChatScreen interactive (not just static)
+| Feature | Status |
+|---------|--------|
+| Onboarding (3 screens) | ✅ |
+| Home Screen with Map | ✅ |
+| Check-in Modal | ✅ |
+| Support Options Modal | ✅ |
+| Insights Modal | ✅ |
+| Breathing Exercise | ✅ |
+| Breathing Complete Screen | ✅ |
+| Faru Group Chat (auto-play) | ✅ |
+| Koamas 1:1 Chat | ✅ |
+| Custom Tab Icons | ✅ |
+
+---
+
+## 🔮 Future Enhancements (Post-Hackathon)
 
 ### Medium Priority
-4. [ ] Add smooth transitions between screens
-5. [ ] Haptic feedback on check-in
-6. [ ] Sound effects for breathing exercise
+- [ ] Haptic feedback on check-in
+- [ ] Sound effects for breathing exercise
+- [ ] Smooth screen transitions
 
-### Low Priority (Post-Hackathon)
-7. [ ] Real backend integration
-8. [ ] User authentication
-9. [ ] Push notifications
-10. [ ] Analytics dashboard
+### Low Priority
+- [ ] Real backend integration
+- [ ] User authentication
+- [ ] Push notifications
+- [ ] Analytics dashboard
 
 ---
 
@@ -364,11 +390,14 @@ Always accessible in the app:
 | 3 | AtollScreen | ✅ | Yes |
 | 4 | HomeScreen | ✅ | Yes |
 | 5 | CheckinModal | ✅ | Yes |
-| 6 | SupportOptionsModal | ✅ | Partial |
+| 6 | SupportOptionsModal | ✅ | Yes |
 | 7 | InsightsModal | ✅ | Yes |
 | 8 | BreathingScreen | ✅ | Yes |
-| 9 | ChatScreen (Faru) | ⚠️ | Static |
-| 10 | KoamasScreen | ✅ | Yes (not accessible) |
+| 9 | BreathingCompleteScreen | ✅ | Yes |
+| 10 | ChatScreen (Faru) | ✅ | Yes (auto-play + input) |
+| 11 | KoamasScreen | ✅ | Yes |
+
+**Total: 11 screens, all functional**
 
 ---
 
@@ -376,28 +405,20 @@ Always accessible in the app:
 
 **Recommended demo path:**
 
-1. **Onboarding** (30 sec)
-   - Welcome → Nickname → Select Atoll
+### Path 1: Sunny User (2 min)
+1. **Onboarding** (30s) → Welcome → Nickname → Atoll
+2. **Explore Map** (30s) → See pulse dots, tap Insights
+3. **Check in Sunny** (20s) → See success
+4. **Faru Chat** (40s) → Watch messages appear
 
-2. **Explore Map** (30 sec)
-   - Show pulse dots across Maldives
-   - Tap Insights to see Aava chart
+### Path 2: Stormy User (3 min) ⭐ Recommended
+1. **Onboarding** (30s) → Welcome → Nickname → Atoll
+2. **Check in Stormy** (30s) → See support options
+3. **Talk to Koamas** (45s) → Type message, get response
+4. **Breathing Exercise** (1.5min) → Complete 3 cycles → See completion screen
+5. **Faru Chat** (30s) → Watch community support
 
-3. **Check-in Flow** (45 sec)
-   - Tap "How's your weather?"
-   - Select Stormy
-   - Show Support Options
-
-4. **Breathing Exercise** (1 min)
-   - Navigate to Breathe tab
-   - Complete 2-3 cycles
-   - Show stats
-
-5. **Group Chat** (30 sec)
-   - Navigate to Chat tab
-   - Show anonymous creatures
-
-**Total Demo Time:** ~3 minutes
+**Total Demo Time:** 2-3 minutes
 
 ---
 
@@ -411,7 +432,9 @@ npm install
 npx expo start
 ```
 
+**Scan QR code** with Expo Go app to test on device.
+
 ---
 
 *Last Updated: December 12, 2025*
-
+*Version: 1.0 (Hackathon Ready)*

@@ -1,7 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
 import { View, Text, Pressable, Animated, Easing } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { COLORS } from '../constants';
+import { MainStackParamList } from '../navigation/types';
+
+const TARGET_CYCLES = 3; // Navigate to complete screen after 3 cycles
 
 type Phase = 'idle' | 'inhale' | 'hold1' | 'exhale' | 'hold2';
 
@@ -16,11 +21,13 @@ const PHASE_LABELS: Record<Phase, string> = {
 
 export default function BreathingScreen() {
   const insets = useSafeAreaInsets();
+  const navigation = useNavigation<NativeStackNavigationProp<MainStackParamList>>();
   const [isActive, setIsActive] = useState(false);
   const [phase, setPhase] = useState<Phase>('idle');
   const [countdown, setCountdown] = useState(4);
   const [cycles, setCycles] = useState(0);
   const [totalSeconds, setTotalSeconds] = useState(0);
+  const totalSecondsRef = useRef(0); // Ref to track seconds for navigation
 
   // Animation values
   const scaleAnim = useRef(new Animated.Value(0.6)).current;
@@ -124,27 +131,50 @@ export default function BreathingScreen() {
     startCountdown();
 
     // Duration timer
+    totalSecondsRef.current = 0;
     durationTimer.current = setInterval(() => {
-      setTotalSeconds((prev) => prev + 1);
+      totalSecondsRef.current += 1;
+      setTotalSeconds(totalSecondsRef.current);
     }, 1000);
 
     // Phase timer
-    const runPhase = (currentPhase: Phase) => {
+    const runPhase = (currentPhase: Phase, currentCycles: number) => {
       phaseTimer.current = setTimeout(() => {
         const next = nextPhase(currentPhase);
         setPhase(next);
         animateCircle(next);
         
+        let newCycles = currentCycles;
+        
         // Count cycle when completing hold2 -> inhale
         if (currentPhase === 'hold2') {
-          setCycles((prev) => prev + 1);
+          newCycles = currentCycles + 1;
+          setCycles(newCycles);
+          
+          // Check if we've reached target cycles
+          if (newCycles >= TARGET_CYCLES) {
+            // Stop the exercise
+            if (phaseTimer.current) clearTimeout(phaseTimer.current);
+            if (countdownTimer.current) clearInterval(countdownTimer.current);
+            if (durationTimer.current) clearInterval(durationTimer.current);
+            
+            setIsActive(false);
+            setPhase('idle');
+            
+            // Navigate to completion screen
+            navigation.navigate('BreathingComplete', {
+              cycles: newCycles,
+              duration: totalSecondsRef.current,
+            });
+            return;
+          }
         }
         
-        runPhase(next);
+        runPhase(next, newCycles);
       }, PHASE_DURATION);
     };
 
-    runPhase('inhale');
+    runPhase('inhale', 0);
   };
 
   // Stop/Reset
